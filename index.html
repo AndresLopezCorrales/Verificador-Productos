@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de precios</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/function.js"></script>
+
+</head>
+
+<body>
+
+    <div id="div-flex">
+        <div id="img-bonnie">
+            <img src="./img/bonnie.png" alt="">
+        </div>
+        <div id="div-barcode">
+            <p id="respuesta">
+                <img src="/img/barcode.gif" alt="" srcset="" width="100%" height="100%">
+                <span id="titulo-CodigoBarras">Codigo de barras</span>
+            </p>
+        </div>
+        <div id="img-freddy">
+            <img src="./img/freddy.png" alt="">
+        </div>
+    </div>
+
+    <div class="div-abajo">
+        <p id="fecha-hora"></p>
+
+        <div id="div-toggles">
+
+            <div class="div-abajo">
+                <img src="./img/mx.png" alt="" id="img-mx">
+                <img src="./img/usa.png" alt="" id="img-usa">
+            </div>
+
+            <label class="toggle-switch" id="toggle-idioma">
+                <input type="checkbox" onclick="toggleIdioma()" />
+                <span class="slider"></span>
+            </label>
+
+            <div class="div-abajo">
+                <img src="./img/sol.png" alt="" id="img-sol">
+                <img src="./img/luna.png" alt="">
+            </div>
+
+            <label class="toggle-switch" id="toggle-mode">
+                <input type="checkbox" onclick="toggleDarkMode()" />
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

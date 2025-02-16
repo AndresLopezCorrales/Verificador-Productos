@@ -1,0 +1,131 @@
+:root {
+    --color-fondo: aliceblue;
+    --color-texto: #232324;
+    --color-toggle: #4caf50;
+    --color-bola: #5c5a54;
+}
+
+.darkmode {
+    --color-fondo: #232324;
+    --color-texto: aliceblue;
+    --color-toggle: #596aa8;
+    --color-bola: white;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+
+#div-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    position: relative;
+}
+
+#img-bonnie,
+#img-freddy {
+    position: absolute;
+    top: 0;
+    /* Ajusta según la necesidad de alineación horizontal */
+}
+
+#img-bonnie {
+    left: 0;
+    /* Bonnie a la izquierda */
+}
+
+#img-freddy {
+    right: 0;
+    /* Freddy a la derecha */
+}
+
+
+#div-barcode,
+#respuesta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-abajo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#img-mx,
+#img-sol {
+    padding-right: 15px;
+}
+
+#toggle-idioma,
+#toggle-mode {
+    margin: 1px;
+}
+
+#div-toggles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Toggle Switch Start*/
+
+/* Container for the toggle */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+/* Hide default checkbox */
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The track */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 24px;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s;
+}
+
+/* The circular slider */
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 2px;
+    background-color: var(--color-bola);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+/* Toggled state */
+.toggle-switch input:checked+.slider {
+    background-color: var(--color-toggle);
+}
+
+.toggle-switch input:checked+.slider::before {
+    transform: translateX(26px);
+}
+
+/*Toggle Switch end*/
