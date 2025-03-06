@@ -160,7 +160,7 @@ function buscar(codigo) {
         if (productos[i][0] == codigo) {
             salida += `${tituloProducto}: ${productos[i][1]} <br>
             ${tituloPrecio}: ${productos[i][2]} <br>
-            <img src="./img/${productos[i][3]}" width='25%' height='25%' >`;
+            <img src="./img/${productos[i][3]}" width='50%' height='75%' >`;
             document.getElementById("respuesta").innerHTML = salida;
             control = true;
             break;
