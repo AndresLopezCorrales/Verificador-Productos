@@ -1,72 +1,24 @@
-var productos = [
-    ["1", "Palomitas", "$ 23.00", "palomitas.png"],
-    ["2", "Chocolate", "$ 18.50", "chocolate.png"],
-    ["3", "Refresco Cola", "$ 15.00", "refresco_cola.png"],
-    ["4", "Galletas", "$ 12.75", "galletas.jpg"],
-    ["5", "Papas Fritas", "$ 20.00", "papas_fritas.png"],
-    ["6", "Agua Embotellada", "$ 10.00", "agua_embotellada.jpg"],
-    ["7", "Jugos Naturales", "$ 22.50", "jugos_naturales.png"],
-    ["8", "Barra de Cereal", "$ 17.00", "barra_cereal.png"],
-    ["9", "Helado", "$ 25.00", "helado.jpg"],
-    ["10", "Maní", "$ 14.00", "mani.png"],
-    ["11", "Chicle", "$ 5.00", "chicle.jpg"],
-    ["12", "Nachos", "$ 30.00", "nachos.jpg"],
-    ["13", "Dulces Gomita", "$ 19.50", "dulces_gomita.png"],
-    ["14", "Paleta de Hielo", "$ 15.00", "paleta_hielo.png"],
-    ["15", "Cacahuates", "$ 13.00", "cacahuates.png"],
-    ["16", "Bebida Energética", "$ 35.00", "bebida_energetica.png"],
-    ["17", "Brownie", "$ 28.00", "brownie.png"],
-    ["18", "Yogur Bebible", "$ 18.00", "yogur_bebible.png"],
-    ["19", "Fruta Deshidratada", "$ 26.50", "fruta_deshidratada.png"],
-    ["20", "Pretzels", "$ 21.00", "pretzels.png"]
-];
+var productos = [];
 
-var productosEnEspaniol = [
-    ["1", "Palomitas", "$ 23.00", "palomitas.png"],
-    ["2", "Chocolate", "$ 18.50", "chocolate.png"],
-    ["3", "Refresco Cola", "$ 15.00", "refresco_cola.png"],
-    ["4", "Galletas", "$ 12.75", "galletas.jpg"],
-    ["5", "Papas Fritas", "$ 20.00", "papas_fritas.png"],
-    ["6", "Agua Embotellada", "$ 10.00", "agua_embotellada.jpg"],
-    ["7", "Jugos Naturales", "$ 22.50", "jugos_naturales.png"],
-    ["8", "Barra de Cereal", "$ 17.00", "barra_cereal.png"],
-    ["9", "Helado", "$ 25.00", "helado.jpg"],
-    ["10", "Maní", "$ 14.00", "mani.png"],
-    ["11", "Chicle", "$ 5.00", "chicle.jpg"],
-    ["12", "Nachos", "$ 30.00", "nachos.jpg"],
-    ["13", "Dulces Gomita", "$ 19.50", "dulces_gomita.png"],
-    ["14", "Paleta de Hielo", "$ 15.00", "paleta_hielo.png"],
-    ["15", "Cacahuates", "$ 13.00", "cacahuates.png"],
-    ["16", "Bebida Energética", "$ 35.00", "bebida_energetica.png"],
-    ["17", "Brownie", "$ 28.00", "brownie.png"],
-    ["18", "Yogur Bebible", "$ 18.00", "yogur_bebible.png"],
-    ["19", "Fruta Deshidratada", "$ 26.50", "fruta_deshidratada.png"],
-    ["20", "Pretzels", "$ 21.00", "pretzels.png"]
-];
+function cargarProductos(csv) {
+    productos = [];
+    fetch(csv)
+        .then(response => response.text())
+        .then(data => {
+            // Divide el contenido del archivo por líneas
+            let lineas = data.split('\n');
 
-// Traducciones en inglés
-var productosEnIngles = [
-    ["1", "Popcorn", "$ 23.00", "palomitas.png"],
-    ["2", "Chocolate", "$ 18.50", "chocolate.png"],
-    ["3", "Cola Drink", "$ 15.00", "refresco_cola.png"],
-    ["4", "Cookies", "$ 12.75", "galletas.jpg"],
-    ["5", "Potato Chips", "$ 20.00", "papas_fritas.png"],
-    ["6", "Bottled Water", "$ 10.00", "agua_embotellada.jpg"],
-    ["7", "Natural Juices", "$ 22.50", "jugos_naturales.png"],
-    ["8", "Cereal Bar", "$ 17.00", "barra_cereal.png"],
-    ["9", "Ice Cream", "$ 25.00", "helado.jpg"],
-    ["10", "Peanuts", "$ 14.00", "mani.png"],
-    ["11", "Gum", "$ 5.00", "chicle.jpg"],
-    ["12", "Nachos", "$ 30.00", "nachos.jpg"],
-    ["13", "Gummy Candy", "$ 19.50", "dulces_gomita.png"],
-    ["14", "Ice Pop", "$ 15.00", "paleta_hielo.png"],
-    ["15", "Peanuts", "$ 13.00", "cacahuates.png"],
-    ["16", "Energy Drink", "$ 35.00", "bebida_energetica.png"],
-    ["17", "Brownie", "$ 28.00", "brownie.png"],
-    ["18", "Drinkable Yogurt", "$ 18.00", "yogur_bebible.png"],
-    ["19", "Dried Fruit", "$ 26.50", "fruta_deshidratada.png"],
-    ["20", "Pretzels", "$ 21.00", "pretzels.png"]
-];
+            // Recorre cada línea para crear el arreglo de productos
+            lineas.forEach(linea => {
+                if (linea.trim() !== '') { // Ignora líneas vacías
+                    let partes = linea.split(',');
+                    productos.push([partes[0], partes[1], partes[2], partes[3]]);
+                }
+                console.log(linea);
+            });
+        })
+        .catch(error => console.error('Error al cargar el archivo:', error));
+}
 
 function toggleIdioma() {
     const toggleSwitch = document.querySelector('#toggle-idioma input');
@@ -74,11 +26,14 @@ function toggleIdioma() {
     var tituloCodigoBarras = document.getElementById("titulo-CodigoBarras");
 
     if (toggleSwitch.checked) {
-        productos = productosEnIngles;
+        //productos = productosEnIngles;
+        cargarProductos(`./data/productosInglesCsv.csv`);
+
         tituloCodigoBarras.textContent = "Code Bar";
         localStorage.setItem('toggleState', 'checked');  // Guardar estado
     } else {
-        productos = productosEnEspaniol; // Vuelve a los nombres en español
+        //productos = productosEnEspaniol; // Vuelve a los nombres en español
+        cargarProductos(`./data/productosCsv.csv`);
         tituloCodigoBarras.textContent = "Codigo de Barras";
         localStorage.setItem('toggleState', 'unchecked');  // Guardar estado
     }
@@ -98,6 +53,7 @@ function toggleDarkMode() {
 }
 
 window.addEventListener('load', function () {
+    //cargarProductos(`./data/productosCsv.csv`);
     const toggleSwitchIdioma = document.querySelector('#toggle-idioma input');
     const savedState = localStorage.getItem('toggleState');
 
@@ -108,12 +64,14 @@ window.addEventListener('load', function () {
 
     if (savedState === 'checked') {
         toggleSwitchIdioma.checked = true;
-        productos = productosEnIngles;
+        cargarProductos(`./data/productosInglesCsv.csv`);
         tituloCodigoBarras.textContent = "Code Bar";
-    } else {
+    } else if (savedState === 'unchecked') {
         toggleSwitchIdioma.checked = false;
-        productos = productosEnEspaniol;
+        cargarProductos(`./data/productosCsv.csv`);
         tituloCodigoBarras.textContent = "Codigo de Barras";
+    } else {
+        cargarProductos(`./data/productosCsv.csv`);  // Se ejecuta si no hay nada en el localStorage
     }
 
     if (savedStateMode === 'activo') {
@@ -142,10 +100,8 @@ document.addEventListener("keydown", (event) => {
 function buscar(codigo) {
     var control = false;
     var salida = "";
-
     var tituloProducto = "Producto";
-    var tituloPrecio = "Precio"; // Texto por defecto en español
-
+    var tituloPrecio = "Precio";
     var tituloNoEncontrado = "El producto no se encuentra";
 
     // Verifica el estado guardado en localStorage
