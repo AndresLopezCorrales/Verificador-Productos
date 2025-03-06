@@ -1,8 +1,8 @@
 var productos = [];
 
-function cargarProductos(txt) {
+function cargarProductos(csv) {
     productos = [];
-    fetch(txt)
+    fetch(csv)
         .then(response => response.text())
         .then(data => {
             // Divide el contenido del archivo por líneas
@@ -27,13 +27,13 @@ function toggleIdioma() {
 
     if (toggleSwitch.checked) {
         //productos = productosEnIngles;
-        cargarProductos(`./data/productosIngles.txt`);
+        cargarProductos(`./data/productosInglesCsv.csv`);
 
         tituloCodigoBarras.textContent = "Code Bar";
         localStorage.setItem('toggleState', 'checked');  // Guardar estado
     } else {
         //productos = productosEnEspaniol; // Vuelve a los nombres en español
-        cargarProductos(`./data/productos.txt`);
+        cargarProductos(`./data/productosCsv.csv`);
         tituloCodigoBarras.textContent = "Codigo de Barras";
         localStorage.setItem('toggleState', 'unchecked');  // Guardar estado
     }
@@ -53,7 +53,7 @@ function toggleDarkMode() {
 }
 
 window.addEventListener('load', function () {
-    //cargarProductos(`./data/productos.txt`);
+    //cargarProductos(`./data/productosCsv.csv`);
     const toggleSwitchIdioma = document.querySelector('#toggle-idioma input');
     const savedState = localStorage.getItem('toggleState');
 
@@ -64,14 +64,14 @@ window.addEventListener('load', function () {
 
     if (savedState === 'checked') {
         toggleSwitchIdioma.checked = true;
-        cargarProductos(`./data/productosIngles.txt`);
+        cargarProductos(`./data/productosInglesCsv.csv`);
         tituloCodigoBarras.textContent = "Code Bar";
     } else if (savedState === 'unchecked') {
         toggleSwitchIdioma.checked = false;
-        cargarProductos(`./data/productos.txt`);
+        cargarProductos(`./data/productosCsv.csv`);
         tituloCodigoBarras.textContent = "Codigo de Barras";
     } else {
-        cargarProductos(`./data/productos.txt`);  // Se ejecuta si no hay nada en el localStorage
+        cargarProductos(`./data/productosCsv.csv`);  // Se ejecuta si no hay nada en el localStorage
     }
 
     if (savedStateMode === 'activo') {
